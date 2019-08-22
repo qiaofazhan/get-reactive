@@ -30,6 +30,17 @@ public class UserController {
     public Mono<User> findByUsername(@PathVariable String username) {
         return this.userService.findByUsername(username);
     }
+    /* @GetMapping("")
+    public Flux<User> findAll() {
+        return this.userService.findAll();
+    }*/
+/*
+
+    @GetMapping("")
+    public Flux<User> findAll() {
+        return this.userService.findAll().delayElements(Duration.ofSeconds(1));
+    }
+*/
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<User> findAll() {

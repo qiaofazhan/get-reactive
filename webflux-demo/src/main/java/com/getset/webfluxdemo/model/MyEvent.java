@@ -9,9 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "event")
+@Document(collection = "event")//指定collection(MongoDB中的表)名为event；
 public class MyEvent {
     @Id
-    private Long id;
+    private Long id;// 2 这次我们使用表示时间的long型数据作为ID
     private String message;
 }

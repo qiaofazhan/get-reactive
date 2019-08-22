@@ -24,11 +24,11 @@ public class UserService {
     public Mono<User> save(User user) {
         return userRepository.save(user)
                 .doOnError(System.out::println)
-                .onErrorResume(e ->
-                        userRepository.findByUsername(user.getUsername())
-                                .flatMap(originalUser -> {
+                .onErrorResume(e ->//1 onErrorResume进行错误处理
+                        userRepository.findByUsername(user.getUsername())//2 找到username重复的记录
+                                .flatMap(originalUser -> {// 4 由于函数式为User -> Publisher，所以用flatMap
                                     user.setId(originalUser.getId());
-                                    return userRepository.save(user);
+                                    return userRepository.save(user);//3 拿到ID从而进行更新而不是创建
                                 }));
     }
 

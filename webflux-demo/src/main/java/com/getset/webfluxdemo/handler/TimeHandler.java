@@ -20,8 +20,10 @@ public class TimeHandler {
         return ok().contentType(MediaType.TEXT_PLAIN).body(Mono.just("Today is " + new SimpleDateFormat("yyyy-MM-dd").format(new Date())), String.class);
     }
     public static Mono<ServerResponse> sendTimePerSec(ServerRequest serverRequest) {
-        return ok().contentType(MediaType.TEXT_EVENT_STREAM).body(
-                Flux.interval(Duration.ofSeconds(1)).
+        return ok().contentType(MediaType.TEXT_EVENT_STREAM).body(// MediaType.TEXT_EVENT_STREAM表示Content-Type为text/event-stream，即SSE
+                Flux.interval(Duration.ofSeconds(1)).//利用interval生成每秒一个数据的流。
                         map(l -> new SimpleDateFormat("HH:mm:ss").format(new Date())), String.class);
     }
+
+
 }
